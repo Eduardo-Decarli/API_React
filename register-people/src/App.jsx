@@ -67,11 +67,36 @@ function App() {
                 </button>
             </form>
 
-            {mensagemFinal && (
-                <div className="resultado">
-                    <h4>{mensagemFinal}</h4>
+            {mensagemFinal ? (
+                <MensagemSucesso
+                    mensagem={mensagemFinal}
+                    onVoltar={() => {
+                        setMensagemFinal('');
+                        setNome('');
+                        setEmail('');
+                        setTipo('');
+                    }}
+                />
+            ) : (
+                <div className="container">
+                    <h2>Cadastro de Pessoa</h2>
+                    <form onSubmit={handleSubmit}>
+                        {/* ... campos ... */}
+                    </form>
                 </div>
             )}
+
+        </div>
+    );
+}
+
+function MensagemSucesso({ mensagem, onVoltar }) {
+    return (
+        <div className="tela-sucesso">
+            <div className="conteudo">
+                <h1>{mensagem}</h1>
+                <button onClick={onVoltar}>Cadastrar outra pessoa</button>
+            </div>
         </div>
     );
 }
